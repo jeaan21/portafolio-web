@@ -2,14 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/debug', function () {
-    return 'OK - ' . var_export(config('app.debug'), true) . ' - ' . config('app.env') . ' - ' . config('database.default');
-});
-
-Route::get('/ping', function () {
-    return 'pong';
-});
-
 use App\Http\Controllers\PageController;
 
 use App\Http\Controllers\Api\ChatbotController;
