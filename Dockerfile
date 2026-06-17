@@ -33,14 +33,15 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 
 WORKDIR /var/www/html
 
+# Forzar APP_DEBUG=true para debuggear (se sobreescribe con env vars de Render)
+ENV APP_DEBUG=true
+
 # Copiar los archivos del proyecto
 COPY . .
 
-# Crear .env, BD y permisos de laravel
+# Crear .env y BD SQLite
 RUN cp .env.example .env \
-    && touch database/database.sqlite \
-    && chown -R www-data:www-data storage bootstrap/cache database \
-    && chmod -R 775 storage bootstrap/cache database
+    && touch database/database.sqlite
 
 # Instalar dependencias de PHP y Node.js, y compilar frontend
 RUN composer install --no-dev --optimize-autoloader \
@@ -49,6 +50,10 @@ RUN composer install --no-dev --optimize-autoloader \
     && php artisan key:generate --force \
     && php artisan migrate --force \
     && php artisan storage:link
+
+# Establecer permisos DESPUÉS de crear archivos
+RUN chown -R www-data:www-data storage bootstrap/cache database \
+    && chmod -R 775 storage bootstrap/cache database
 
 # Puerto en el que Apache escucha
 EXPOSE 80
