@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/debug', function () {
+    return 'OK - ' . config('app.debug') . ' - ' . config('app.env') . ' - ' . config('database.default');
+});
+
 use App\Http\Controllers\PageController;
 
 use App\Http\Controllers\Api\ChatbotController;
