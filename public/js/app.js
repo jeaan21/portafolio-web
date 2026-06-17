@@ -105,3 +105,46 @@
     }
   }, { passive: true });
 })();
+
+// Re-run scroll animations after Swup page transitions
+(function() {
+  function initAnimations() {
+    // Animate on scroll
+    const els = document.querySelectorAll('.animate-on-scroll:not(.is-visible)');
+    if (els.length > 0) {
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      els.forEach(function(el) { observer.observe(el); });
+    }
+
+    // Card stagger
+    const staggerCards = document.querySelectorAll('.card-stagger:not(.is-visible)');
+    if (staggerCards.length > 0) {
+      const staggerObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const siblings = entry.target.parentElement ? Array.from(entry.target.parentElement.querySelectorAll(':scope > .card-stagger:not(.is-visible)')) : null;
+            if (siblings && siblings.length > 1) {
+              siblings.forEach(function(card, index) {
+                setTimeout(function() { card.classList.add('is-visible'); }, index * 100);
+              });
+              siblings.forEach(function(c) { staggerObserver.unobserve(c); });
+            } else {
+              entry.target.classList.add('is-visible');
+              staggerObserver.unobserve(entry.target);
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+      staggerCards.forEach(function(el) { staggerObserver.observe(el); });
+    }
+  }
+
+  document.addEventListener('swup:page:view', initAnimations);
+})();
