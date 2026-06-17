@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/debug', function () {
-    return 'OK - ' . config('app.debug') . ' - ' . config('app.env') . ' - ' . config('database.default');
+    return 'OK - ' . var_export(config('app.debug'), true) . ' - ' . config('app.env') . ' - ' . config('database.default');
+});
+
+Route::get('/ping', function () {
+    return 'pong';
 });
 
 use App\Http\Controllers\PageController;

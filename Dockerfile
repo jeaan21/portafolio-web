@@ -48,18 +48,12 @@ RUN composer install --no-dev --optimize-autoloader \
     && npm install \
     && npm run build \
     && php artisan key:generate --force \
+    && php artisan migrate --force \
     && php artisan storage:link
 
 # Establecer permisos DESPUÉS de crear archivos
 RUN chown -R www-data:www-data storage bootstrap/cache database \
     && chmod -R 775 storage bootstrap/cache database
 
-# Copiar entrypoint y configurar
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
 # Puerto en el que Apache escucha
 EXPOSE 80
-
-# Entrypoint que corre migraciones antes de iniciar Apache
-ENTRYPOINT ["docker-entrypoint.sh"]
