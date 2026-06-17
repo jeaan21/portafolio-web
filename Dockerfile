@@ -49,6 +49,7 @@ RUN composer install --no-dev --optimize-autoloader \
     && npm run build \
     && php artisan key:generate --force \
     && php artisan migrate --force \
+    && php artisan db:seed --force \
     && php artisan storage:link
 
 # Establecer permisos DESPUÉS de crear archivos
