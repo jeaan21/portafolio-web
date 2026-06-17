@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Mensaje;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Exception;
+use Throwable;
 
 class ContactController extends Controller
 {
@@ -63,7 +63,7 @@ class ContactController extends Controller
                         ->subject($data['asunto'])
                         ->html($htmlContent);
                 });
-            } catch (Exception $e) {
+            } catch (Throwable $e) {
                 logger()->error('Error enviando correo de contacto: ' . $e->getMessage());
             }
 
