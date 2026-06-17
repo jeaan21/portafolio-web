@@ -37,16 +37,21 @@ COPY . /var/www/html
 # Copiar .env.example como .env por defecto (valores sobreescritos por ENV de Render)
 RUN cp .env.example .env
 
-# Establecer permisos para las carpetas de Laravel
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Crear base de datos SQLite por defecto
+RUN touch database/database.sqlite
 
 # Instalar dependencias de PHP y Node.js, y compilar frontend
 WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader \
     && npm install \
     && npm run build \
-    && php artisan key:generate --force
+    && php artisan key:generate --force \
+    && php artisan migrate --force \
+    && php artisan storage:link
+
+# Establecer permisos para las carpetas de Laravel y la BD SQLite
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 
 # Puerto en el que Apache escucha
 EXPOSE 80
