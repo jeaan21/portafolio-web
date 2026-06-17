@@ -31,27 +31,24 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs
 
+WORKDIR /var/www/html
+
 # Copiar los archivos del proyecto
-COPY . /var/www/html
+COPY . .
 
-# Copiar .env.example como .env por defecto (valores sobreescritos por ENV de Render)
-RUN cp .env.example .env
-
-# Crear base de datos SQLite por defecto
-RUN touch database/database.sqlite
+# Crear .env, BD y permisos de laravel
+RUN cp .env.example .env \
+    && touch database/database.sqlite \
+    && chown -R www-data:www-data storage bootstrap/cache database \
+    && chmod -R 775 storage bootstrap/cache database
 
 # Instalar dependencias de PHP y Node.js, y compilar frontend
-WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader \
     && npm install \
     && npm run build \
     && php artisan key:generate --force \
     && php artisan migrate --force \
     && php artisan storage:link
-
-# Establecer permisos para las carpetas de Laravel y la BD SQLite
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 
 # Puerto en el que Apache escucha
 EXPOSE 80
