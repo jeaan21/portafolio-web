@@ -185,10 +185,9 @@
     };
 
     var csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-    var baseUrl = document.querySelector('meta[name="base-url"]')?.getAttribute('content') || '';
 
     try {
-      var response = await fetch(baseUrl + '/api/v1/post_mensaje.php', {
+      var response = await fetch('/api/v1/post_mensaje.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrfToken },
         body: JSON.stringify(data)

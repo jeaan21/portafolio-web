@@ -130,11 +130,10 @@
     if (input) input.disabled = true;
     showTyping();
 
-    const baseUrl = document.querySelector('meta[name="base-url"]')?.getAttribute('content') || '';
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
 
     try {
-      const response = await fetch(baseUrl + '/api/v1/chatbot.php', {
+      const response = await fetch('/api/v1/chatbot.php', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
