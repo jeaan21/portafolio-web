@@ -6,7 +6,6 @@
   }
   if (theme === 'dark') {
     document.documentElement.classList.add('dark');
-    document.body.classList.add('dark');
   }
   const html = document.documentElement;
   const sunIcons = document.querySelectorAll('#sun-icon, #sun-icon-mobile');
@@ -22,7 +21,6 @@
       html.classList.toggle('dark');
       const isDark = html.classList.contains('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      document.body.classList.toggle('dark', isDark);
       updateIcons();
     });
   });
@@ -35,7 +33,8 @@
   const menuIcon = document.getElementById('menu-icon');
   const closeIcon = document.getElementById('close-icon');
   if (!btn || !menu) return;
-  btn.addEventListener('click', function() {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
     const isOpen = !menu.classList.contains('hidden');
     menu.classList.toggle('hidden', isOpen);
     menuIcon.classList.toggle('hidden', !isOpen);
