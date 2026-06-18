@@ -145,6 +145,9 @@
               </div>
 
               <div class="md:col-span-2 pt-4">
+                <p class="text-xs text-slate-400 text-center mb-4">
+                  🔒 Tu información es privada. Sin spam, sin compromisos. <strong class="text-slate-500 dark:text-slate-400">Primera consulta técnica 100% gratuita.</strong>
+                </p>
                 <button type="submit" id="contact-submit" 
                   class="w-full h-16 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black uppercase tracking-[0.2em] text-xs hover:shadow-2xl hover:shadow-purple-500/40 active:scale-[0.98] transition-all flex items-center justify-center gap-4 shadow-lg shadow-purple-500/20">
                   <span>Enviar Propuesta Técnica</span>

@@ -1,13 +1,70 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
+  @if(env('GA4_MEASUREMENT_ID'))
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('GA4_MEASUREMENT_ID') }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', "{{ env('GA4_MEASUREMENT_ID') }}");
+    </script>
+  @endif
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title', 'Jean Arias') | @yield('description', 'Ingeniero de Sistemas & Full Stack Developer')</title>
-  <meta name="description" content="@yield('description', 'Ingeniero de Sistemas & Full Stack Developer')">
+
+  <title>@yield('title', 'Jean Arias | Full Stack Developer & Ingeniero de Sistemas')</title>
+
+  <meta name="description" content="@yield('meta_description', 'Jean Arias — Desarrollador Full Stack e Ingeniero de Sistemas en Lima, Perú. Especializado en React, Laravel, Node.js y arquitecturas cloud escalables. 20+ proyectos entregados. Disponible para proyectos.')">
+  <meta name="keywords" content="desarrollador full stack lima peru, ingeniero de sistemas freelance peru, full stack developer laravel react, arquitectura de software peru, jean arias developer">
+  <meta name="author" content="Jean Arias">
+
+  <link rel="canonical" href="{{ url()->current() }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:title" content="@yield('og_title', 'Jean Arias | Full Stack Developer & Ingeniero de Sistemas')">
+  <meta property="og:description" content="@yield('og_description', 'Desarrollador Full Stack e Ingeniero de Sistemas en Lima, Perú. 20+ proyectos entregados. Especializado en React, Laravel, Node.js y arquitecturas escalables.')">
+  <meta property="og:image" content="@yield('og_image', asset('img/og-preview.jpg'))">
+  <meta property="og:locale" content="es_PE">
+  <meta property="og:site_name" content="Jean Arias Portfolio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="@yield('og_title', 'Jean Arias | Full Stack Developer')">
+  <meta name="twitter:description" content="@yield('og_description', 'Desarrollador Full Stack en Lima, Perú. 20+ proyectos entregados.')">
+  <meta name="twitter:image" content="@yield('og_image', asset('img/og-preview.jpg'))">
+
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+  <link rel="apple-touch-icon" href="{{ asset('img/apple-touch-icon.png') }}">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jean Arias",
+    "jobTitle": "Full Stack Developer & Ingeniero de Sistemas",
+    "description": "Desarrollador Full Stack e Ingeniero de Sistemas en Lima, Perú. Especializado en React, Laravel, Node.js y arquitecturas escalables.",
+    "url": "{{ url('/') }}",
+    "email": "jean2015arias@gmail.com",
+    "telephone": "+51935515325",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lima",
+      "addressCountry": "PE"
+    },
+    "sameAs": [
+      "https://github.com/jemy-22",
+      "https://www.linkedin.com/in/jean-arias-atencio-447b03272/"
+    ],
+    "knowsAbout": ["React", "Laravel", "Node.js", "TypeScript", "Docker", "PHP", "PostgreSQL", "MySQL"]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <script>
     (function() {
       var theme = localStorage.getItem('theme');
@@ -19,6 +76,7 @@
       }
     })();
   </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -37,6 +95,8 @@
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="base-url" content="{{ url('/') }}">
+
+  @yield('head')
 </head>
 <body class="text-slate-900 antialiased transition-colors duration-300">
   
@@ -79,12 +139,10 @@
           }
         });
 
-        // Actualizar dinámicamente la pestaña activa del menú al cambiar de página
         swup.hooks.on('page:view', () => {
           const currentPath = window.location.pathname;
           document.querySelectorAll('#navbar a').forEach(a => {
             const href = new URL(a.href, window.location.origin).pathname;
-            // Evitar resaltar el anchor de "sobre mí" si no estamos en inicio
             if (a.href.includes('#about') && currentPath !== '/' && currentPath !== '/inicio') {
               a.classList.remove('text-blue-600');
               a.classList.add('text-slate-500', 'dark:text-slate-400', 'hover:text-slate-900', 'dark:hover:text-white');

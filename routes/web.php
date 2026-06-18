@@ -8,7 +8,10 @@ use App\Http\Controllers\Api\ChatbotController;
 use App\Http\Controllers\Api\ContactController;
 
 Route::get('/', [PageController::class, 'inicio'])->name('inicio');
-Route::get('/inicio', [PageController::class, 'inicio']);
+
+// Redirección 301 de /inicio → / para evitar contenido duplicado
+Route::redirect('/inicio', '/', 301);
+
 Route::get('/proyectos', [PageController::class, 'proyectos'])->name('proyectos');
 Route::get('/contacto', [PageController::class, 'contacto'])->name('contacto');
 Route::get('/arquitectura', [PageController::class, 'arquitectura'])->name('arquitectura');
@@ -19,5 +22,3 @@ Route::post('/api/v1/post_mensaje.php', [ContactController::class, 'handle'])->m
 
 // Redirección heredada de sobre-mi.php
 Route::redirect('/sobre-mi', '/#about');
-
-

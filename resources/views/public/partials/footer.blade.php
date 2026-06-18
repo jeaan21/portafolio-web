@@ -10,7 +10,8 @@
           JA<span class="text-blue-600">.</span>
         </a>
         <p class="text-lg text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
-          Ingeniero de Sistemas y Desarrollador Full Stack. Construyendo soluciones digitales con artesanía y precisión técnica.
+          Construyo el software que hace crecer negocios.<br>
+          <span class="text-slate-400 dark:text-slate-500 text-sm">Perú · Disponible para proyectos remotos</span>
         </p>
         <div class="flex items-center gap-4">
           <a href="{{ env('GITHUB_URL', 'https://github.com/jemy-22') }}" target="_blank" class="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-white/5 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-white/10 transition-all duration-300 shadow-sm">
@@ -38,8 +39,8 @@
         <div class="space-y-6">
           <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-[0.2em]">Legal</h4>
           <ul class="space-y-4">
-            <li><a href="#" class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacidad</a></li>
-            <li><a href="#" class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Términos</a></li>
+            <li><a href="{{ route('contacto') }}#privacidad" class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacidad</a></li>
+            <li><a href="{{ route('contacto') }}#terminos" class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Términos</a></li>
           </ul>
         </div>
         <div class="space-y-6 col-span-2 sm:col-span-1">

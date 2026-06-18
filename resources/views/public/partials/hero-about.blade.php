@@ -10,7 +10,7 @@
   <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
       
-      <!-- Left Column: Content & Action (Protagonism info) -->
+      <!-- Left Column: Content & Action -->
       <div class="lg:col-span-7 space-y-8 text-left animate-on-scroll">
         <div class="space-y-4">
           <!-- Availability Badge -->
@@ -19,7 +19,7 @@
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
             </span>
-            <span class="text-[10px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest">Disponible para nuevos desafíos</span>
+            <span class="text-[10px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest">Disponible para nuevos proyectos</span>
           </div>
 
           <!-- Name & Main Title -->
@@ -37,37 +37,46 @@
           </div>
         </div>
 
-        <!-- Professional Biography -->
+        <!-- Professional Biography — orientada a resultados, sin mencionar Estudiante en el hero -->
         <div class="space-y-4 max-w-2xl">
           <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-            Estudiante de Ingeniería de Sistemas y Desarrollador Full Stack con una visión clara: transformar la complejidad empresarial en interfaces elegantes y sistemas robustos altamente escalables.
+            Desarrollador Full Stack e Ingeniero de Sistemas con <strong class="text-slate-900 dark:text-white">4+ años construyendo productos reales</strong>. Diseño y entrego sistemas completos — backend, base de datos e interfaces — que funcionan cuando tu negocio los necesita.
           </p>
           <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed">
-            Mi formación académica rigurosa me permite diseñar y construir desde el backend y arquitecturas de datos, hasta interfaces pixel-perfect con excelente rendimiento. Diseño experiencias digitales integrales que impulsan negocios.
+            Desde arquitecturas de datos hasta interfaces pixel-perfect. Con IA integrada como ventaja competitiva en cada proyecto.
+            <span class="text-blue-600 dark:text-blue-400 font-semibold cursor-pointer hover:underline" onclick="document.getElementById('chatbot-toggle')?.click()">¿Tienes dudas? Pregúntale a mi asistente IA →</span>
           </p>
         </div>
 
-        <!-- Main Actions -->
+        <!-- Main Actions — jerarquía clara: primario azul / secundario outline -->
         <div class="flex flex-wrap gap-4 sm:gap-5 pt-2">
-          <a href="{{ route('proyectos') }}" 
-            class="group h-12 sm:h-14 px-6 sm:px-8 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold flex items-center justify-center gap-3 hover:bg-slate-800 dark:hover:bg-slate-100 hover:shadow-xl hover:shadow-slate-900/10 transition-all w-full sm:w-auto">
-            Explorar Proyectos
+          {{-- CTA PRIMARIO: conversión directa --}}
+          <a href="{{ route('contacto') }}" 
+            class="group h-12 sm:h-14 px-6 sm:px-8 rounded-2xl bg-blue-600 text-white font-bold flex items-center justify-center gap-3 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 transition-all w-full sm:w-auto">
+            Hablemos de tu Proyecto
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
           </a>
           
-          <a href="{{ asset('resume.pdf') }}" download 
+          {{-- CTA SECUNDARIO: ver portafolio --}}
+          <a href="{{ route('proyectos') }}" 
             class="h-12 sm:h-14 px-6 sm:px-8 rounded-2xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 font-bold flex items-center justify-center gap-3 ring-1 ring-slate-200 dark:ring-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 hover:ring-slate-300 transition-all shadow-sm w-full sm:w-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Descargar CV
+            Ver Proyectos
           </a>
 
-          <a href="{{ route('contacto') }}" 
-            class="h-12 sm:h-14 px-6 sm:px-8 rounded-2xl bg-blue-50 dark:bg-white/5 text-blue-600 dark:text-slate-300 font-bold flex items-center justify-center gap-2 hover:bg-blue-100 dark:hover:bg-white/10 transition-all w-full sm:w-auto">
-            Hablemos
+          {{-- CV: menos prominente --}}
+          <a href="{{ asset('resume.pdf') }}" download 
+            class="h-12 sm:h-14 px-5 rounded-2xl bg-transparent text-slate-500 dark:text-slate-400 font-semibold flex items-center justify-center gap-2 hover:text-slate-700 dark:hover:text-slate-200 transition-all text-sm w-full sm:w-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar CV
           </a>
         </div>
 
-        <!-- Quick Stats Bar (Combined directly in hero) -->
+        <!-- Urgency micro-copy -->
+        <p class="text-xs text-slate-400 -mt-2">
+          ⚡ Respondo en menos de 24h · <span class="text-green-500 font-bold">● Disponible ahora</span> · Primera consulta sin costo
+        </p>
+
+        <!-- Quick Stats Bar —stat mejorado -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-slate-200/60 dark:border-white/10">
           <div>
             <div class="text-3xl font-extrabold text-slate-900 dark:text-white">20+</div>
@@ -78,12 +87,12 @@
             <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Tecnologías</div>
           </div>
           <div>
-            <div class="text-3xl font-extrabold text-slate-900 dark:text-white">100%</div>
-            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Compromiso</div>
+            <div class="text-3xl font-extrabold text-slate-900 dark:text-white">&lt; 24h</div>
+            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Respuesta</div>
           </div>
           <div>
-            <div class="text-3xl font-extrabold text-slate-900 dark:text-white">24/7</div>
-            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Disponibilidad</div>
+            <div class="text-3xl font-extrabold text-slate-900 dark:text-white">4+</div>
+            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Años exp.</div>
           </div>
         </div>
       </div>
@@ -97,7 +106,9 @@
 
           <!-- Image Container -->
           <div class="relative h-full w-full rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200 dark:shadow-none ring-1 ring-slate-200 dark:ring-white/10">
-            <img src="{{ asset('img/foto-perfil.jpg') }}" alt="Jean Arias"
+            <img src="{{ asset('img/foto-perfil.jpg') }}" 
+              alt="Jean Arias - Desarrollador Full Stack e Ingeniero de Sistemas en Lima, Perú"
+              loading="lazy"
               class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect fill=%22%23f1f5f9%22 width=%22400%22 height=%22400%22/><text x=%22200%22 y=%22200%22 text-anchor=%22middle%22 dy=%22.35em%22 fill=%22%2394a3b8%22 font-size=%2264%22 font-family=%22system-ui%22 font-weight=%22bold%22>JA</text></svg>'">
           </div>
@@ -108,13 +119,13 @@
               <div class="w-11 h-11 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-blue-500/30">4+</div>
               <div>
                 <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Años de</p>
-                <p class="text-xs font-bold text-slate-900 dark:text-white">Pasión Código</p>
+                <p class="text-xs font-bold text-slate-900 dark:text-white">Práctica Real</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Bento Strengths (Engineering & Full Stack cards inline) -->
+        <!-- Bento Strengths -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[400px] mx-auto lg:max-w-none">
           <!-- Card 1: Ingeniería & Lógica -->
           <div class="p-5 rounded-3xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none hover:border-blue-200 dark:hover:border-blue-500/30 transition-all group">
@@ -122,16 +133,16 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5 font-heading">Ingeniería & Lógica</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Formación académica rigurosa aplicada a la eficiencia algorítmica.</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Sistemas que no se caen. Algoritmos eficientes aplicados a problemas reales de negocio.</p>
           </div>
 
-          <!-- Card 2: Full Stack Craft -->
+          <!-- Card 2: Full Stack Craft — copy orientado al cliente -->
           <div class="p-5 rounded-3xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none hover:border-purple-200 dark:hover:border-purple-500/30 transition-all group">
             <div class="w-10 h-10 rounded-2xl bg-slate-50 dark:bg-white/10 shadow-sm flex items-center justify-center text-purple-600 dark:text-purple-400 mb-3 group-hover:scale-110 transition-transform">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
             </div>
             <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5 font-heading">Full Stack Craft</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Dominio moderno de JS/TS y PHP para soluciones integrales robustas.</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">De la idea al producto en producción. El stack que mejor resuelve tu problema, no el que está de moda.</p>
           </div>
         </div>
       </div>
