@@ -40,8 +40,8 @@
 
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Person",
+    "{{ '@context' }}": "https://schema.org",
+    "{{ '@type' }}": "Person",
     "name": "Jean Arias",
     "jobTitle": "Full Stack Developer & Ingeniero de Sistemas",
     "description": "Desarrollador Full Stack e Ingeniero de Sistemas en Lima, Perú. Especializado en React, Laravel, Node.js y arquitecturas escalables.",
@@ -49,7 +49,7 @@
     "email": "jean2015arias@gmail.com",
     "telephone": "+51935515325",
     "address": {
-      "@type": "PostalAddress",
+      "{{ '@type' }}": "PostalAddress",
       "addressLocality": "Lima",
       "addressCountry": "PE"
     },
