@@ -27,10 +27,6 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Instalar Node.js y npm (necesario para Vite)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
-
 WORKDIR /var/www/html
 
 # Debug por defecto (Render env vars sobreescriben esto)
@@ -43,10 +39,8 @@ COPY . .
 RUN cp .env.example .env \
     && touch database/database.sqlite
 
-# Instalar dependencias de PHP y Node.js, y compilar frontend
+# Instalar dependencias de PHP y configurar Laravel
 RUN composer install --no-dev --optimize-autoloader \
-    && npm install \
-    && npm run build \
     && php artisan key:generate --force \
     && php artisan migrate --force \
     && php artisan db:seed --force \
