@@ -50,5 +50,11 @@ RUN composer install --no-dev --optimize-autoloader \
 RUN chown -R www-data:www-data storage bootstrap/cache database \
     && chmod -R 775 storage bootstrap/cache database
 
+# Hacer el script de entrada ejecutable
+RUN chmod +x docker-entrypoint.sh
+
+# Configurar el script de entrada
+ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]
+
 # Puerto en el que Apache escucha
 EXPOSE 80
